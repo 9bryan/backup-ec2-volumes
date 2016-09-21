@@ -29,9 +29,9 @@ for instance in instances:
         snapshot = ec2.create_snapshot(VolumeId=volume.id, Description=snapshot_description)
         print "Snapshotting instance: " + instance_name + "(" + instance.id + ")" + " volume: " + volume.id
         for snapshot in volume.snapshots.all():
-            print snapshot.description
+            #print snapshot.description
             snapshot_datetime = snapshot.start_time
             cutoff = now - datetime.timedelta(days=retention_days)
             if snapshot_datetime < cutoff and snapshot.description.endswith(snapshot_suffix):
-                #snapshot.delete
+                snapshot.delete
                 print "Deleted old snapshot: " + snapshot.id + " from " + instance_name + "(" + instance.id + ")" + " volume: " + volume.id
