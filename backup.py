@@ -33,5 +33,5 @@ for instance in instances:
             snapshot_datetime = snapshot.start_time
             cutoff = now - datetime.timedelta(days=retention_days)
             if snapshot_datetime < cutoff and snapshot.description.endswith(snapshot_suffix):
-                snapshot.delete
+                snapshot.delete()
                 print "Deleted old snapshot: " + snapshot.id + " from " + instance_name + "(" + instance.id + ")" + " volume: " + volume.id
